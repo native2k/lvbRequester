@@ -4,7 +4,7 @@ LVB (Leipziger Verkehrsbetriebe) Requester
 
 .. image:: https://badge.fury.io/py/lvbRequester.png
     :target: http://badge.fury.io/py/lvbRequester
-    
+
 .. image:: https://travis-ci.org/native2k/lvbRequester.png?branch=master
         :target: https://travis-ci.org/native2k/lvbRequester
 
@@ -20,7 +20,9 @@ small library to request information from LVB (l.de) website
 Features
 --------
 
-* TODO
+- retrieve autocompletion data to find out how the station is named in system (getAutoCompletion)
+- retrieve timetable for all trains on one station and any expected delay (getStation)
+- retrieve a connection between two stations (getConnection)
 
 ========
 Usage

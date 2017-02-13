@@ -81,7 +81,7 @@ class LVB(object):
             'mode': 'autocomplete',
             'limit': limit,
             'poi': '',
-            'q': station,
+            'q': station.encode('utf-8') if isinstance(station, types.UnicodeType) else station,
         }
         data = requests.get('%s?%s' % (
             self.URL['complete'],
@@ -130,6 +130,10 @@ class LVB(object):
             '{"name":"results[5][2][date]","value":"%(date)s"},',
         ]
 
+        stationFrom = stationFrom.encode('utf-8') if isinstance(stationFrom, types.UnicodeType) else stationFrom
+
+        stationTo = stationTo.encode('utf-8') if isinstance(stationTo, types.UnicodeType) else stationTo
+
         for atransport in transport:
             res.append('{"name":"results[5][2][means_of_transport][]","value":"%s"},' % atransport)
 
@@ -144,7 +148,7 @@ class LVB(object):
     @classmethod
     def _getConnectionParse(self, result):
         """ builds connection results """
-        return result['connections']
+        return result.get('connections', {})
 
     @classmethod
     def getStation(self, station, time=None):
@@ -173,6 +177,8 @@ class LVB(object):
             # '{"name":"results[5][2][time]","value":""},',
             '{"name":"results[5][2][mode]","value":"stop"}]',
         ]
+        stop = stop.encode('utf-8') if isinstance(stop, types.UnicodeType) else stop
+
         return self._encodeRequest(res, {
             'stop': stop.replace(' ', '+'),
             'date': time.strftime('%d.%m.%Y'),
@@ -192,4 +198,5 @@ if __name__ == '__main__':
     # , datetime(2017, 2, 10, 12, 57))))
     print "Connection %s" % (pformat(r.getConnection('Leipzig, Marschnerstr.', 'Leipzig, Goerdelerring')))
     # , datetime(2017, 2, 10, 13, 17))))
-    print "Autocomplete %s" % (pformat(r.getAutoCompletion('Leipzig, Thomaskirche')))
+    print "Autocomplete %s" % (pformat(r.getAutoCompletion(u'marschnerstra\xdfe')))
+    print "Autocomplete %s" % (pformat(r.getAutoCompletion(u'marschner')))

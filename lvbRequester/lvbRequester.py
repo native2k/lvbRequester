@@ -10,6 +10,15 @@ import logging
 log = logging.getLogger('lvbRequester')
 
 
+class JsonDecodingError(Exception):
+    """ exception on json decode which also returns raw content """
+
+    def __init__(self, msg, raw):
+        Exception.__init__(self, msg)
+        self.raw = raw
+        log.error(raw)
+
+
 class LVB(object):
     """
         Returns travel informations from Leipziger Verkehrsbetriebe (l.de)
@@ -83,12 +92,17 @@ class LVB(object):
             'poi': '',
             'q': station.encode('utf-8') if isinstance(station, types.UnicodeType) else station,
         }
-        data = requests.get('%s?%s' % (
+        url = '%s?%s' % (
             self.URL['complete'],
-            urllib.urlencode(reqData))
+            urllib.urlencode(reqData)
         )
+        log.debug('URL: %s' % url)
+        data = requests.get(url)
         if data.status_code == 200:
-            return data.json()['stations']
+            try:
+                return data.json()['stations']
+            except ValueError, e:
+                raise JsonDecodingError(e.message, data.text)
         raise Exception('Unable to retrieve data error: %s' % data.status_code)
 
     @classmethod
@@ -104,7 +118,10 @@ class LVB(object):
         data = requests.post(self.URL['connection'], data=params, headers=self.HEADER)
         if data.status_code == 200:
             # log.debug('BODY: %s' % (data.text))
-            return self._getConnectionParse(data.json())
+            try:
+                return self._getConnectionParse(data.json())
+            except ValueError, e:
+                raise JsonDecodingError(e.message, data.text)
         raise Exception('Unable to retrieve data error: %s' % data.status_code)
 
     @classmethod
@@ -163,7 +180,10 @@ class LVB(object):
         data = requests.post(self.URL['station'], data=params, headers=self.HEADER)
         if data.status_code == 200:
             # log.debug('BODY: %s' % (data.text))
-            return self._getStationParse(data.json())
+            try:
+                return self._getStationParse(data.json())
+            except ValueError, e:
+                raise JsonDecodingError(e.message, data.text)
         raise Exception('Unable to retrieve data error: %s' % data.status_code)
 
     @classmethod

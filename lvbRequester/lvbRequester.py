@@ -64,7 +64,9 @@ class LVB(object):
                 return datetime.now() + timedelta(minutes=time)
             elif isinstance(time, datetime):
                 return time
-            elif isinstance(time, type.StringTypes):
+            elif isinstance(time, (timedelta, )):
+                return datetime.now() + time
+            elif isinstance(time, types.StringTypes):
                 # TODO
                 return datetime.now()
             else:

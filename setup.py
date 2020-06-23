@@ -31,6 +31,9 @@ setup(
     package_dir={'lvbRequester': 'lvbRequester'},
     include_package_data=True,
     install_requires=[
+        'requests',
+        'egenix-mx-base',
+        'urllib',
     ],
     license="BSD",
     zip_safe=False,

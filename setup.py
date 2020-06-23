@@ -34,6 +34,7 @@ setup(
         'requests',
         'egenix-mx-base',
         'urllib',
+        'future',
     ],
     license="BSD",
     zip_safe=False,

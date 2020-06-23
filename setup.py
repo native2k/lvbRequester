@@ -19,7 +19,7 @@ readme = open('README.rst').read()
 
 setup(
     name='lvbRequester',
-    version='0.1.0',
+    version='0.1.1',
     description='small library to request information from LVB (l.de) website',
     long_description=readme,
     author='Sven Richter',

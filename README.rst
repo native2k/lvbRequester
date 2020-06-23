@@ -89,6 +89,7 @@ Or, if you have virtualenvwrapper installed::
 
 History
 -------
-
+* 0.1.1 (2020-06-23)
+    * Fix for new website version.
 * 0.1.0 (2017-02-10)
     * First release on PyPI.

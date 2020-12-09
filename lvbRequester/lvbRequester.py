@@ -30,9 +30,9 @@ class LVB(object):
     """
 
     URL = {
-        'connection': 'https://www.l.de/verkehrsbetriebe/fahrplan/',
+        'connection': 'https://www.l.de/verkehrsbetriebe/fahrplan/verbindung',
         'complete': 'https://www.l.de/ajax_de',
-        'station': 'https://www.l.de/verkehrsbetriebe/fahrplan/'
+        'station': 'https://www.l.de/verkehrsbetriebe/fahrplan/haltestelle'
     }
 
     TRANSPORTMAP = {
@@ -139,22 +139,22 @@ class LVB(object):
         """ builds parameter structur for connection call """
         transport = list(self.TRANSPORTMAP.keys())
         res = [
-            'results[5][3][function]=ws_find_connections&results[5][3][data]=[',
-            '{"name":"results[5][3][is_extended]","value":""},',
-            '{"name":"results[5][3][from_opt]","value":"3"},',
-            '{"name":"results[5][3][from]","value":"%(from)s"},',
-            '{"name":"results[5][3][from_lat]","value":""},',
-            '{"name":"results[5][3][from_lng]","value":""},',
-            '{"name":"results[5][3][to_opt]","value":"3"},',
-            '{"name":"results[5][3][to]","value":"%(to)s"},',
-            '{"name":"results[5][3][to_lat]","value":""},',
-            '{"name":"results[5][3][to_lng]","value":""},',
-            '{"name":"results[5][3][via]","value":""},',
-            '{"name":"results[5][3][via_lat]","value":""},',
-            '{"name":"results[5][3][via_lng]","value":""},',
-            '{"name":"results[5][3][time_mode]","value":"departure"},',
-            '{"name":"results[5][3][time]","value":"%(time)s"},',
-            '{"name":"results[5][3][date]","value":"%(date)s"},',
+            'results[5][5][function]=ws_find_connections&results[5][5][data]=[',
+            '{"name":"results[5][5][is_extended]","value":""},',
+            '{"name":"results[5][5][from_opt]","value":"3"},',
+            '{"name":"results[5][5][from]","value":"%(from)s"},',
+            '{"name":"results[5][5][from_lat]","value":""},',
+            '{"name":"results[5][5][from_lng]","value":""},',
+            '{"name":"results[5][5][to_opt]","value":"3"},',
+            '{"name":"results[5][5][to]","value":"%(to)s"},',
+            '{"name":"results[5][5][to_lat]","value":""},',
+            '{"name":"results[5][5][to_lng]","value":""},',
+            '{"name":"results[5][5][via]","value":""},',
+            '{"name":"results[5][5][via_lat]","value":""},',
+            '{"name":"results[5][5][via_lng]","value":""},',
+            '{"name":"results[5][5][time_mode]","value":"departure"},',
+            '{"name":"results[5][5][time]","value":"%(time)s"},',
+            '{"name":"results[5][5][date]","value":"%(date)s"},',
         ]
 
         # stationFrom = stationFrom.encode('utf-8') if isinstance(stationFrom, str) else stationFrom
@@ -199,11 +199,11 @@ class LVB(object):
         """ build paramter structure for station request """
 
         res = [
-            'results[5][3][function]=ws_info_stop&results[5][3][data]=[',
-            '{"name":"results[5][3][stop]","value":"%(stop)s"},',
-            '{"name":"results[5][3][date]","value":"%(date)s"},',
-            '{"name":"results[5][3][time]","value":"%(time)s"},',
-            '{"name":"results[5][3][mode]","value":"stop"}]'
+            'results[5][5][function]=ws_info_stop&results[5][5][data]=[',
+            '{"name":"results[5][5][stop]","value":"%(stop)s"},',
+            '{"name":"results[5][5][date]","value":"%(date)s"},',
+            '{"name":"results[5][5][time]","value":"%(time)s"},',
+            '{"name":"results[5][5][mode]","value":"stop"}]'
         ]
         # stop = stop.encode('utf-8') if isinstance(stop, str) else stop
 

@@ -32,7 +32,7 @@ class LVB(object):
     URL = {
         'connection': 'https://www.l.de/verkehrsbetriebe/fahrplan/verbindung',
         'complete': 'https://www.l.de/ajax_de',
-        'station': 'https://www.l.de/verkehrsbetriebe/fahrplan/haltestelle'
+        'station': 'https://www.l.de/verkehrsbetriebe/fahrplan/abfahrten'
     }
 
     TRANSPORTMAP = {
